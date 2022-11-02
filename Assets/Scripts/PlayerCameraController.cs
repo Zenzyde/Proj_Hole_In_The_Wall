@@ -18,7 +18,7 @@ public class PlayerCameraController : MonoBehaviour
 	Camera camera;
 	float SurvivalCounter;
 	MenuManager Menu;
-	bool bDoSurvivalCount, bDoCameraZoom;
+	bool bDoSurvivalCount;
 	const string GameOverText = "You won, and lasted for X extra seconds";
 
 	// Start is called before the first frame update
@@ -30,7 +30,6 @@ public class PlayerCameraController : MonoBehaviour
 		SurviveText.enabled = false;
 		camera = GetComponent<Camera>();
 		Menu = FindObjectOfType<MenuManager>();
-		bDoCameraZoom = true;
 	}
 
 	// Update is called once per frame
@@ -62,9 +61,6 @@ public class PlayerCameraController : MonoBehaviour
 
 	void Zoom()
 	{
-		if (!bDoCameraZoom) return;
-
-		if (!bDoSurvivalCount && transform.localPosition.z <= -4) bDoCameraZoom = false;
 		if (CanSeePlayer())
 		{
 			transform.localPosition = Vector3.SmoothDamp(transform.localPosition, LocalMaxZoom, ref DampVelocity, ZoomDuration, ZoomSpeed);
